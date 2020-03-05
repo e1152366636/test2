@@ -1,0 +1,32 @@
+DELIMITER $$
+CREATE ____PROCEDURE_____ sp_emp (OUT avgsalary FLOAT)
+BEGIN 
+DECLARE ename VARCHAR(12); 
+DECLARE edu VARCHAR(10); 
+DECLARE esalary FLOAT;
+DECLARE totalsalary FLOAT; 
+DECLARE count SMALLINT;
+DECLARE done INT DEFAULT -1;
+DECLARE cur_emp CURSOR FOR 
+SELECT name, education, salary
+FROM tb_emp INNER JOIN tb_dept 
+ON tb_emp.deptno=tb_dept.deptno AND deptname= 'ÊÐ³¡²¿';
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=1;
+SET totalsalary=0;
+SET count=0;
+OPEN cur_emp;
+FETCH cur_emp INTO ename, edu, esalary;
+WHILE (done!=1) DO
+	SELECT ename, edu, esalary;
+	SET totalsalary=totalsalary+________esalary___________;
+	SET count=count+1;
+	FETCH cur_emp INTO ename, edu, esalary;
+END WHILE;
+IF (count>0) THEN
+	SET avgsalary= totalsalary/count;
+ELSE
+	SET avgsalary=0;
+END IF;
+CLOSE ____cur_emp_____;
+END $$
+DELIMITER ;

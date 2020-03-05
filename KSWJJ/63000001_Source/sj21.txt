@@ -1,0 +1,15 @@
+DELIMITER $$
+CREATE TRIGGER tr_选课  ______  INSERT ON 选课
+FOR EACH ROW
+BEGIN
+  DECLARE sno,cno INT;
+  SELECT COUNT(*) INTO sno FROM 学生 WHERE 学号=NEW.学号;
+  SELECT COUNT(*) INTO cno FROM 课程 WHERE 课程名称=________________;
+  IF(sno=0) THEN
+    INSERT INTO 学生(学号) values(________________); 
+  END IF;
+  IF(cno=0) THEN
+    INSERT INTO 课程(课程名称) values(NEW.课程名称); 
+  END IF;
+END $$
+DELIMITER ;

@@ -1,0 +1,8 @@
+CREATE trigger tr_emp after DELETE
+ON tb_dept 
+FOR EACH row
+UPDATE tb_employee 
+SET deptno='' 
+WHERE deptno=(select deptno from tb_dept);
+delete from tb_dep WHERE deptno='D2';
+SELECT * FROM tb_employee;

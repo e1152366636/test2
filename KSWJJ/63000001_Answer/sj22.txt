@@ -1,0 +1,14 @@
+DELIMITER $$
+CREATE FUNCTION fn_emp (dept CHAR(20)) 
+RETURNS FLOAT 
+DETERMINISTIC
+BEGIN 
+Declare sum_salary float;
+SELECT sum(salary) into sum_salary 
+FROM tb_employee INNER JOIN tb_dept 
+on tb_employee.deptno=tb_dept.deptno 
+WHERE dname=dept
+GROUP BY dname  ; 
+return  sum_salary ;
+END $$
+DELIMITER ;

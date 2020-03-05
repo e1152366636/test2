@@ -1,0 +1,17 @@
+DELIMITER //
+CREATE FUNCTION fn_yggl(eid CHAR(4))
+_____RETURNS________ CHAR(20)
+DETERMINISTIC
+BEGIN
+    DECLARE workage INT;
+    DECLARE newsalary FLOAT;
+    SELECT YEAR(CURDATE())-SUBSTRING(worktime,1,4) INTO  workage FROM tb_emp WHERE eno=eid;
+    IF ____workage>=30__________ THEN
+        UPDATE tb_emp SET salary=salary*1.05 WHERE eno=eid;
+        RETURN('工资已经更新');
+    ELSE
+        RETURN('工作年限不够，工资不能更新');
+    END IF;
+END //
+DELIMITER ;
+SELECT _____fn_yggl_____('1118');

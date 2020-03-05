@@ -1,0 +1,11 @@
+DELIMITER $$
+CREATE FUNCTION FN_平均成绩(XM VARCHAR(10)) 
+_______ FLOAT
+DETERMINISTIC
+BEGIN 
+______ Grade float;
+SELECT AVG(成绩) INTO ______ FROM 选课, 学生
+WHERE 选课.学号=学生.学号 AND 姓名=XM; 
+RETURN Grade ;
+END $$
+DELIMITER ;
